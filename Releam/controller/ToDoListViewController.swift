@@ -7,186 +7,124 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 class ToDoListViewController: UITableViewController {
-
+    
+    let realm = try! Realm()
+    
     //MARK: - initialization of global variables
-    var arr = [Item]()
-    //let defualts = UserDefaults.standard
-    var checkmarks = [Int:Bool]()
+    var ToDoItems: Results<Items>?
+
+    //MARK: - a way to do something if a certain variables is occupied
     var selectedCategory: Category?{
         didSet{
             loadItems()
         }
     }
     
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        
-        //loadItems()
-       
-        if let checks = UserDefaults.standard.value(forKey: "checkmarks") as? NSData {
-            checkmarks = NSKeyedUnarchiver.unarchiveObject(with: checks as Data) as! [Int : Bool]
-        }
-        
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arr.count
+        return ToDoItems?.count ?? 1
     }
-    
-   
-    
-   //MARK: - table properties
+    //MARK: - table properties
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print(arr[indexPath.row])
-        if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
-            if cell.accessoryType == .checkmark{
-                cell.accessoryType = .none
-                checkmarks[indexPath.row] = false
-            }
-            else{
-                cell.accessoryType = .checkmark
-                checkmarks[indexPath.row] = true
+        //print(ToDoItems[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let item = self.ToDoItems?[indexPath.row]{
+            do{
+                try realm.write {
+                    item.done = !item.done
+                }
+            }catch{
+                print(error)
             }
         }
-//        if arr[indexPath.row].done == true {
-//            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-//            arr[indexPath.row].done = false
-//        }else{
-//            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-//            arr[indexPath.row].done = true
-//        }
-//        self.context.delete(self.arr[indexPath.row])
-//        self.arr.remove(at: indexPath.row)
-        self.saveItems()
         tableView.reloadData()
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
-        cell.textLabel?.text = arr[indexPath.row].title
-        
         tableView.deselectRow(at: indexPath, animated: true)
-//        if arr[indexPath.row].done == true {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        cell.textLabel!.text = ToDoItems?[indexPath.row].title ?? "No Items Add Yet !"
+        
+        if ToDoItems?[indexPath.row].done == true {
+            cell.accessoryType = .checkmark
 //            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-//            print("checkmark")
-//        }else{
-//            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-//            print("none")
-//        }
-        if checkmarks[indexPath.row] != nil {
-            cell.accessoryType = checkmarks[indexPath.row]! ? .checkmark : .none
-        } else {
-            checkmarks[indexPath.row] = false
+        }else{
             cell.accessoryType = .none
+            //tableView.cellForRow(at: indexPath)?.accessoryType = .none
         }
-        UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: checkmarks), forKey: "checkmarks")
-        UserDefaults.standard.synchronize()
         return cell
         
     }
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let delete = UITableViewRowAction(style: .destructive, title: "Remove") { (action, indexPath) in
-            // delete item at indexPath
-            
-            self.context.delete(self.arr[indexPath.row])
-            self.arr.remove(at: indexPath.row)
-            self.saveItems()
+        override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+            let delete = UITableViewRowAction(style: .destructive, title: "Remove") { (action, indexPath) in
+                // delete item at indexPath
+                if let item = self.ToDoItems?[indexPath.row]{
+                    do{
+                        try self.realm.write {
+                            self.realm.delete(item)
+                        }
+                    }catch{
+                        print(error)
+                    }
+                }
+                tableView.reloadData()
+            }
+            return [delete]
         }
-        return [delete]
-    }
-
-//MARK: - add buttom
+    
+    //MARK: - add buttom
     
     @IBAction func AddBarButtom(_ sender: UIBarButtonItem) {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add Item In the List", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            
-            
-            let newitem = Item(context: self.context)
-            newitem.title = textField.text!
-            //newitem.done = false
-            newitem.parentcategory = self.selectedCategory
-            self.arr.append(newitem)
-            self.saveItems()
-            //self.tableView.reloadData()
-            print(newitem.parentcategory!)
-            
+            // unwrapping  ? optional value
+            if let currentCategory = self.selectedCategory{
+                do{
+                    try self.realm.write{
+                        let newitem = Items()
+                        newitem.title = textField.text!
+                        currentCategory.items.append(newitem)
+                        self.tableView.reloadData()
+                    }
+                }catch{
+                    print("error in saving Items: \(error)")
+                }
+            }
+            self.tableView.reloadData()
         }
         alert.addTextField { (AlertTextField) in
             AlertTextField.placeholder = "Add Item"
             textField = AlertTextField
-            
         }
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
-        
-    }
-//MARK: - save and load data using core data method
-    func saveItems(){
-        
-        do{
-            try context.save()
-        }catch{
-            print("error in saving context: \(error)")
-        }
-        self.tableView.reloadData()
     }
     
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
-        let categoryPredicate = NSPredicate(format: "parentcategory.name MATCHES %@ ",selectedCategory!.name!)
-        if let additionalPredicate = predicate{
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [additionalPredicate,categoryPredicate])
-        }else{
-            request.predicate = categoryPredicate
-        }
+    func loadItems() {
         
-        //let request : NSFetchRequest<Item>=Item.fetchRequest()
-        do{
-          arr = try context.fetch(request)
-        } catch{
-            print("error in fetching data : \(error)")
-        }
+        ToDoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
         self.tableView.reloadData()
-    
     }
-
 }
 //MARK: - search bar methods
 extension ToDoListViewController: UISearchBarDelegate{
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
-        let predicate = NSPredicate(format: "title CONTAINS[cd] %@",searchBar.text!)
-        request.predicate = predicate
-        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        
-        loadItems(with: request,predicate: predicate)
-
-        
     // if the text field has no text it gives us the original list of items
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        ToDoItems = selectedCategory?.items.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "title")
+        self.tableView.reloadData()
         if searchBar.text!.count == 0 {
             loadItems()
             DispatchQueue.main.async {
                searchBar.resignFirstResponder()
           }
         }
-        
     }
-}
 }

@@ -7,17 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B2BA88221C51F3C005A612C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5B2BA88021C51F3C005A612C /* DataModel.xcdatamodeld */; };
 		5BAA502121E8BFDC007A2352 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAA502021E8BFDC007A2352 /* CategoryViewController.swift */; };
 		5BD5BE11218C6A4B00E1B95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5BE10218C6A4B00E1B95F /* AppDelegate.swift */; };
 		5BD5BE13218C6A4B00E1B95F /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD5BE12218C6A4B00E1B95F /* ToDoListViewController.swift */; };
 		5BD5BE16218C6A4B00E1B95F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BD5BE14218C6A4B00E1B95F /* Main.storyboard */; };
 		5BD5BE18218C6A4B00E1B95F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BD5BE17218C6A4B00E1B95F /* Assets.xcassets */; };
 		5BD5BE1B218C6A4B00E1B95F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BD5BE19218C6A4B00E1B95F /* LaunchScreen.storyboard */; };
+		5BECADCB21F244B80048A603 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BECADCA21F244B80048A603 /* Category.swift */; };
+		5BECADCD21F244C30048A603 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BECADCC21F244C30048A603 /* Items.swift */; };
+		928464FC98B255A1B3295EAD /* Pods_Releam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420311720988B396A2BF0C67 /* Pods_Releam.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5B2BA88121C51F3C005A612C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		1C5A47F22311DE2A455B4891 /* Pods-Releam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Releam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Releam/Pods-Releam.debug.xcconfig"; sourceTree = "<group>"; };
+		420311720988B396A2BF0C67 /* Pods_Releam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Releam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BAA502021E8BFDC007A2352 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		5BD5BE0D218C6A4B00E1B95F /* Releam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Releam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BD5BE10218C6A4B00E1B95F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +29,9 @@
 		5BD5BE17218C6A4B00E1B95F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BD5BE1A218C6A4B00E1B95F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BD5BE1C218C6A4B00E1B95F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BECADCA21F244B80048A603 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		5BECADCC21F244C30048A603 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		8F58C44226F5384836C721D2 /* Pods-Releam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Releam.release.xcconfig"; path = "Pods/Target Support Files/Pods-Releam/Pods-Releam.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,16 +39,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				928464FC98B255A1B3295EAD /* Pods_Releam.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		279ECDD833CF33F759726CF5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1C5A47F22311DE2A455B4891 /* Pods-Releam.debug.xcconfig */,
+				8F58C44226F5384836C721D2 /* Pods-Releam.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5B2F041C21A420F9001B2410 /* DataModel  */ = {
 			isa = PBXGroup;
 			children = (
-				5B2BA88021C51F3C005A612C /* DataModel.xcdatamodeld */,
+				5BECADCA21F244B80048A603 /* Category.swift */,
+				5BECADCC21F244C30048A603 /* Items.swift */,
 			);
 			path = "DataModel ";
 			sourceTree = "<group>";
@@ -69,6 +86,8 @@
 			children = (
 				5BD5BE0F218C6A4B00E1B95F /* Releam */,
 				5BD5BE0E218C6A4B00E1B95F /* Products */,
+				279ECDD833CF33F759726CF5 /* Pods */,
+				67474FE096F8519301A25991 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +113,14 @@
 			path = Releam;
 			sourceTree = "<group>";
 		};
+		67474FE096F8519301A25991 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				420311720988B396A2BF0C67 /* Pods_Releam.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -101,9 +128,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5BD5BE1F218C6A4B00E1B95F /* Build configuration list for PBXNativeTarget "Releam" */;
 			buildPhases = (
+				DA92ADCCC4CBFE0E836CC78F /* [CP] Check Pods Manifest.lock */,
 				5BD5BE09218C6A4B00E1B95F /* Sources */,
 				5BD5BE0A218C6A4B00E1B95F /* Frameworks */,
 				5BD5BE0B218C6A4B00E1B95F /* Resources */,
+				B7E9C05F5191D5A8994C642B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,15 +190,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B7E9C05F5191D5A8994C642B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Releam/Pods-Releam-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Releam/Pods-Releam-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA92ADCCC4CBFE0E836CC78F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Releam-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5BD5BE09218C6A4B00E1B95F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5BAA502121E8BFDC007A2352 /* CategoryViewController.swift in Sources */,
+				5BECADCD21F244C30048A603 /* Items.swift in Sources */,
 				5BD5BE13218C6A4B00E1B95F /* ToDoListViewController.swift in Sources */,
-				5B2BA88221C51F3C005A612C /* DataModel.xcdatamodeld in Sources */,
 				5BD5BE11218C6A4B00E1B95F /* AppDelegate.swift in Sources */,
+				5BECADCB21F244B80048A603 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +375,7 @@
 		};
 		5BD5BE20218C6A4B00E1B95F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C5A47F22311DE2A455B4891 /* Pods-Releam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -318,6 +390,7 @@
 		};
 		5BD5BE21218C6A4B00E1B95F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F58C44226F5384836C721D2 /* Pods-Releam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -352,19 +425,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		5B2BA88021C51F3C005A612C /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5B2BA88121C51F3C005A612C /* DataModel.xcdatamodel */,
-			);
-			currentVersion = 5B2BA88121C51F3C005A612C /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5BD5BE05218C6A4B00E1B95F /* Project object */;
 }
